@@ -9,10 +9,10 @@ import pyttsx3
 import threading
 
 # ============== CONFIG ==============
-API_KEY = ""   # <--- paste your Gemini API key here
+API_KEY = "AIzaSyCZ2Df_CNyM7JgwoJlMXDLGZLuNFn6xIyU"   # <--- paste your Gemini API key here
 MODEL_NAME = "gemini-2.0-flash"
 SYSTEM_PROMPT = (
-"""You are KASU a hospital assistant robot.  
+"""You are a hospital assistant robot.  
 Your job is to understand user commands, identify the intended task, extract key entities, and provide both a natural response (for speech) and a structured JSON output (for robot actions).  
 
 ### Tasks you can identify:
