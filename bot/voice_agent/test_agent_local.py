@@ -25,7 +25,7 @@ class Assistant(Agent):
 async def entrypoint(ctx: agents.JobContext):
     session = AgentSession(
         stt=STT.with_faster_whisper(model="Systran/faster-distil-whisper-small.en", base_url="http://localhost:8000/v1/",api_key="ex"),   
-        llm=google.LLM(model="gemini-1.5-flash"),   # ✅ using official plugin
+        llm=google.LLM(model="gemini-1.5-flash"),  
         tts=TTS.create_kokoro_client(model="speaches-ai/Kokoro-82M-v1.0-ONNX", voice="am_michael", base_url="http://localhost:8000/v1"),  
         vad=silero.VAD.load(),
         # turn_detection=MultilingualModel(),
