@@ -9,7 +9,7 @@ import pyttsx3
 import threading
 
 # ============== CONFIG ==============
-API_KEY = "AIzaSyCZ2Df_CNyM7JgwoJlMXDLGZLuNFn6xIyU"   # <--- paste your Gemini API key here
+API_KEY = ""   # <--- paste your Gemini API key here
 MODEL_NAME = "gemini-2.0-flash"
 SYSTEM_PROMPT = (
 """You are a hospital assistant robot.  
@@ -175,3 +175,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
