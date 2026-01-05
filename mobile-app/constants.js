@@ -9,28 +9,33 @@ export function randomString(length = 12) {
     const rand = Math.floor(Math.random() * chars.length);
     result += chars[rand];
   }
-
+  
   return result;
 }
+export const ROOM_NAME = randomString;
+
+
 
 const DEFAULTS = {
-  MQTT_HOST: "192.168.1.5",
+  MQTT_HOST: "10.114.216.160",
   MQTT_PORT: 9001,
-  FACE_VERIFY_HOST: "192.168.1.5",
+  FACE_VERIFY_HOST: "10.114.216.160",
   LIVEKIT_URL: "wss://jarvis-tclen4x9.livekit.cloud",
-  API_BASE: "http://192.168.1.5:8082"
+  API_BASE: "http://10.114.216.160:8082"
 };
 
-let SETTINGS = { ...DEFAULTS };
+let SETTINGS = null;
 
 export async function loadSettings() {
   try {
     const stored = await AsyncStorage.getItem("APP_SETTINGS");
     const jsonStored= JSON.parse(stored)
-    jsonStored.MQTT_PORT= parseInt(jsonStored.MQTT_PORT)
+    console.log("Loaded settings from storage:", stored);
+    jsonStored.MQTT_PORT= Number(jsonStored.MQTT_PORT)
     if (stored) {
-      SETTINGS = { ...SETTINGS, ...jsonStored };
+      SETTINGS = { ...DEFAULTS, ...jsonStored };
     }
+    return SETTINGS;
   } catch (e) {
     console.log("Failed to load settings", e);
   }
@@ -43,7 +48,11 @@ export async function saveSettings(newSettings) {
 }
 
 export function getSettings() {
+  if (!SETTINGS) {
+    console.log("GET SETTINGS: returning DEFAULTS");
+    return DEFAULTS
+  }
+  console.log("GET SETTINGS CALLED. SETTINGS:",SETTINGS);
   return SETTINGS;
 }
 
-export const ROOM_NAME = randomString;

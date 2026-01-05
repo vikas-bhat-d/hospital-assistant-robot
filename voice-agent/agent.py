@@ -4,15 +4,16 @@ from livekit import agents
 from livekit.agents import AgentSession, Agent, RoomInputOptions, AutoSubscribe
 from livekit.plugins import noise_cancellation, google
 from prompts import AGENT_INSTRUCTION, SESSION_INSTRUCTION
-from tools import navigate_to, deliver_from_to, query, book_appointment, list_doctors, get_user_details
+from tools import navigate_to, deliver_from_to, query, book_appointment, list_doctors, get_user_details ,get_navigation_pins
 
 from dataclasses import dataclass
 import logging
+import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 load_dotenv()
-
+print(os.getenv("GOOGLE_API_KEY"))
 
 @dataclass
 class UserSessionData:
@@ -29,8 +30,10 @@ class UserSessionData:
 class Assistant(Agent):
     def __init__(self) -> None:
         super().__init__(
-            instructions=AGENT_INSTRUCTION,
-            llm=google.beta.realtime.RealtimeModel(
+            instructions=f"{AGENT_INSTRUCTION}",
+            llm=google.realtime.RealtimeModel(
+                model="gemini-2.5-flash-native-audio-preview-09-2025",
+                # model="gemini-2.0-flash-live-001",
                 voice="Aoede",
                 temperature=0.8,
             ),
@@ -40,7 +43,8 @@ class Assistant(Agent):
                 query,
                 book_appointment,
                 list_doctors,
-                get_user_details
+                get_user_details,
+                get_navigation_pins
             ],
         )
 
@@ -86,7 +90,7 @@ async def entrypoint(ctx: agents.JobContext):
     )
 
     await session.generate_reply(
-        instructions=f"user_name: {session.userdata.name} {SESSION_INSTRUCTION}"
+        instructions=f"{SESSION_INSTRUCTION}"
     )
 
 

@@ -1,9 +1,12 @@
 import React, { createContext, useEffect, useState, useRef } from "react";
 import { Magnetometer } from "expo-sensors";
 import { Client, Message } from "paho-mqtt";
-import {getSettings} from "../constants";
+import {getSettings, loadSettings} from "../constants";
+
+console.log("Loading settings in SensorContext...");
 
 const settings=getSettings();
+console.log("SensorContext settings:",settings);
 export const SensorContext = createContext();
 
 export const SensorProvider = ({ children }) => {
@@ -16,6 +19,7 @@ export const SensorProvider = ({ children }) => {
     // ------------------------------------
     // MQTT SETUP
     // ------------------------------------
+    console.log("MQTT Connecting to:", settings.MQTT_HOST, settings.MQTT_PORT);
     mqttClientRef.current = new Client(
       settings.MQTT_HOST,
       settings.MQTT_PORT,

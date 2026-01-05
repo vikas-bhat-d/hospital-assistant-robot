@@ -278,7 +278,7 @@ import {
 } from "@livekit/react-native";
 
 import { Track } from "livekit-client";
-import {getSettings} from "../constants";
+import {getSettings,ROOM_NAME} from "../constants";
 import RobotParticipantEvent from "../component/RobotParticipantEvent";
 const settings=getSettings();
 
@@ -359,11 +359,12 @@ export default function ConversationScreen({ route, navigation }) {
         const resp = await fetch(
           `${settings.API_BASE}/token?id=${
             user?.id || "mobile"
-          }&room=${settings.ROOM_NAME()}&userData=${encodeURIComponent(
+          }&room=${ROOM_NAME()}&userData=${encodeURIComponent(
             JSON.stringify(user)
           )}`
         );
         const data = await resp.json();
+        console.log(data)
 
         setToken(data.token);
         setStatus("connecting");
@@ -399,7 +400,7 @@ export default function ConversationScreen({ route, navigation }) {
           player={listeningPlayer}
           style={[
             styles.videoBg,
-            { opacity: botState === "listening" ? 1 : 0 },
+            { opacity: botState === "speaking" ? 0 : 1 },
           ]}
           contentFit="cover"
           surfaceType="textureView"

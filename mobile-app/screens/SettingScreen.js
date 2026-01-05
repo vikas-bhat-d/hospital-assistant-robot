@@ -18,14 +18,13 @@ export default function SettingsScreen({ navigation }) {
     LIVEKIT_URL: "",
     API_BASE: "",
   });
-
+ 
   useEffect(() => {
     const settings = getSettings();
     setForm(settings);
-  }, []);
+  }, []);      
 
   const updateField = (key, value) => {
-
     setForm({ ...form, [key]: value });
   };
 

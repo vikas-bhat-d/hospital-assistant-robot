@@ -83,3 +83,21 @@ class MQTTInterface:
             except Exception as e:
                 print("[MQTT] Failed to parse goals:", e)
                 print("Raw payload:", repr(payload))
+    def publish_pose(self):
+        try:
+            L, R = self.robot.serial.get_ticks()
+
+            payload = (
+                f"encL={L},encR={R},"
+                f"x={self.robot.odometry.x:.3f},"
+                f"y={self.robot.odometry.y:.3f},"
+                f"theta={self.robot.odometry.theta_deg:.1f}"
+            )
+
+            self.client.publish("robot/pose", payload)
+
+            # Optional debug print
+            print("[MQTT] Published pose:", payload)
+
+        except Exception as e:
+            print("[MQTT] Failed to publish pose:", e)

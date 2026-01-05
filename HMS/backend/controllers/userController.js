@@ -54,7 +54,7 @@ const registerUser = async (req, res) => {
         const user = await newUser.save()
 
         const base64Image = fs.readFileSync(req.file.path).toString("base64");
-        await axios.post("http://localhost:8080/add-encoding", {
+        await axios.post(`${process.env.FACE_URI}/add-encoding`, {
             userId: user._id,
             image: base64Image
         });
@@ -165,7 +165,7 @@ const updateProfile = async (req, res) => {
 const bookAppointment = async (req, res) => {
 
     try {
-
+        console.log("Booking appointment with data:", req.body);
         const { userId, docId, slotDate, slotTime } = req.body
         const docData = await doctorModel.findById(docId).select("-password")
 

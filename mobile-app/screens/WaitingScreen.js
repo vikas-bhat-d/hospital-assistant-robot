@@ -231,12 +231,13 @@ export default function WaitingScreen({ route, navigation }) {
     const verify = async () => {
       try {
         setStatusText("Authenticating");
-
+        console.log("Verifying face with server...");
         const res = await fetch(`${SERVER}/verify-face`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ image }),
         });
+        console.log("Response status:", res);
 
         const data = await res.json();
         console.log("SERVER:", data);

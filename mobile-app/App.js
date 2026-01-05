@@ -361,19 +361,20 @@ export default function App() {
         </Text>
       </View>
     );
-  }
-
-  return (
-    <SensorProvider>
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Camera" component={CameraScreen} />
-        <Stack.Screen name="Waiting" component={WaitingScreen} />
-        <Stack.Screen name="Agent" component={AgentScreen} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-    </SensorProvider>
-  );
+  }else{
+    console.log("App ready, rendering main navigator..");
+    return (
+      <SensorProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Camera" component={CameraScreen} />
+          <Stack.Screen name="Waiting" component={WaitingScreen} />
+          <Stack.Screen name="Agent" component={AgentScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      </SensorProvider>
+    );
+}
 }

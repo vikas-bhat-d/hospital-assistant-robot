@@ -71,7 +71,8 @@ class RobotSystem:
 
                 # only manual (for now)
                 self.state_controller.run(dt)
-
+                
+                self.mqtt.publish_pose()
                 # send motors
                 self.send_pwm()
 

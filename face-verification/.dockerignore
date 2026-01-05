@@ -1,0 +1,5 @@
+__pycache__
+*.pyc
+.env
+face_encodings.pkl
+temp

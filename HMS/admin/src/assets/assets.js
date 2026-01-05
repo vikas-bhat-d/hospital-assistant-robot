@@ -10,6 +10,7 @@ import list_icon from './list_icon.svg'
 import tick_icon from './tick_icon.svg'
 import appointments_icon from './appointments_icon.svg'
 import earning_icon from './earning_icon.svg'
+import logo from "./logo.png"
 import patients_icon from './patients_icon.svg'
 
 export const assets = {
@@ -25,5 +26,6 @@ export const assets = {
     list_icon,
     tick_icon,
     appointments_icon,
-    earning_icon
+    earning_icon,
+    logo
 }
